@@ -21,27 +21,27 @@ st.write("We will turn a pandas DataFrame into an interactive dashboard.")
 ### ============================================================
 
 ### pd.read_excel() is a FUNCTION provided by the pandas module. 
-#df = pd.read_excel("waymo_taxi_sample (2).xlsx")
-#st.subheader("Raw Taxi Data")
+df = pd.read_excel("waymo_taxi_sample.xlsx")
+st.subheader("Raw Taxi Data")
 
 ### st.dataframe() is a Streamlit FUNCTION that displays a pandas
 ### width="stretch" tells Streamlit to use the available horizontal space. 
-#st.dataframe(df, width="stretch")
-#st.write("Number of rows:", len(df))
+st.dataframe(df, width="stretch")
+st.write("Number of rows:", len(df))
 
 
 ### df.columns is an ATTRIBUTE of the DataFrame object. 
-#st.write("Number of columns:", len(df.columns))
+st.write("Number of columns:", len(df.columns))
 
 ### pd.to_datetime() is a pandas FUNCTION.
 ### It receives the Series as an argument and converts its values
 ### into pandas datetime values.
-#df["start_time_local"] = pd.to_datetime(df["start_time_local"])
+df["start_time_local"] = pd.to_datetime(df["start_time_local"])
 
 
 ### Create three new DataFrame columns 
-#df["trip_distance_miles"] = df["trip_distance_meters"] / 1609.34
-#df["trip_duration_minutes"] = df["fare_time_milliseconds"] / 60000
+df["trip_distance_miles"] = df["trip_distance_meters"] / 1609.34
+df["trip_duration_minutes"] = df["fare_time_milliseconds"] / 60000
 
 
 ### ============================================================
@@ -49,21 +49,21 @@ st.write("We will turn a pandas DataFrame into an interactive dashboard.")
 ### ============================================================
 
 ### Display a heading for the dashboard summary section.
-#st.subheader("Summary")
+st.subheader("Summary")
 
 ### st.columns(4) returns four Streamlit CONTAINER OBJECTS.
-#col1, col2, col3, col4 = st.columns(4)
+col1, col2, col3, col4 = st.columns(4)
 
 ### metric() is a METHOD available on that container object.
-#col1.metric("Number of Trips", f"{len(df):,}")
-#col2.metric("Average Fare", f"${df['total_fare_amount'].mean():.2f}")
-#col3.metric("Average Distance", f"{df['trip_distance_miles'].mean():.2f} miles")
-#col4.metric("Average Duration", f"{df['trip_duration_minutes'].mean():.2f} min")
+col1.metric("Number of Trips", f"{len(df):,}")
+col2.metric("Average Fare", f"${df['total_fare_amount'].mean():.2f}")
+col3.metric("Average Distance", f"{df['trip_distance_miles'].mean():.2f} miles")
+col4.metric("Average Duration", f"{df['trip_duration_minutes'].mean():.2f} min")
 
 
 ### Display the updated DataFrame after adding the three new columns.
-#st.subheader("Raw Taxi Data with Additional Columns")
-#st.dataframe(df, width="stretch")
+st.subheader("Raw Taxi Data with Additional Columns")
+st.dataframe(df, width="stretch")
 
 
 ### ============================================================
@@ -72,22 +72,22 @@ st.write("We will turn a pandas DataFrame into an interactive dashboard.")
 
 ### st.sidebar refers to Streamlit's sidebar CONTAINER OBJECT.
 ### header() is a METHOD that places the heading inside the sidebar
-#st.sidebar.header("Filters")
+st.sidebar.header("Filters")
 
 
 ### hail_options is a VARIABLE that refers to a list.
-#hail_options = sorted(df["hail_type"].dropna().unique())
+hail_options = sorted(df["hail_type"].dropna().unique())
 
 
 ### st.sidebar.multiselect() creates an interactive multiselect widget
 ### selected_hail is a variable referring to that returned list.
-#selected_hail = st.sidebar.multiselect( "Hail type:", hail_options, default=None)
+selected_hail = st.sidebar.multiselect( "Hail type:", hail_options, default=None)
 
 
 ### st.sidebar.checkbox() creates a checkbox widget.
 ### A checkbox RETURNS a BOOLEAN value:
-#sfo_only = st.sidebar.checkbox("SFO pickups only")
-#paratransit_only = st.sidebar.checkbox("Paratransit trips only")
+sfo_only = st.sidebar.checkbox("SFO pickups only")
+paratransit_only = st.sidebar.checkbox("Paratransit trips only")
 
 
 ### ============================================================
