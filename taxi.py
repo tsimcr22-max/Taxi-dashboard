@@ -4,7 +4,7 @@
 ### "plotly.express" is a MODULE inside the Plotly package.
 import streamlit as st
 import pandas as pd
-import plotly.express as px
+# import plotly.express as px
 
 ### These are all st functions that display text on the Streamlit page.
 st.title("BAN 6005 Taxi Dashboard")
